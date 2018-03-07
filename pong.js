@@ -28,6 +28,7 @@ function setup() {
 var p1Score = 0;
 var p2Score = 0;
 var textPlay = '';
+var textPlay2 = '';
 
 function draw() {
   background("black");
@@ -56,20 +57,26 @@ function draw() {
   
   textSize(20);
   textAlign(CENTER);
-  text(textPlay, 200, 200);
-
-  //if game ends
-  if (p2Score == 10 || p1Score == 10) {
-    p1Score = 'GAME';
-    p2Score = 'OVER!';
+  text(textPlay, 200, 30);
+  textPlay = 'Press SPACE for new game.';
+  
+  textSize(30);
+  textAlign(CENTER);
+  text(textPlay2, 200, 150);
+	
+  
+  //if player1 wins
+  if (p2Score < 10 && p1Score == 10) {
+    textPlay2 = 'PLAYER 1 WINS!'; 
+  }
+   
+   //if player2 wins	
+   else if (p2Score == 10 && p1Score < 10) {
+    textPlay2 = 'PLAYER 2 WINS!';
     puck.xSpeed = 0;
     puck.ySpeed = 0;
     puck.x = 400;
     puck.y = 250;
-    
-	//if game end and play again
-    textPlay = 'Press SPACE to play again';
-
   }
 
   // draw puck
@@ -146,6 +153,8 @@ function keyPressed() {
   } else if (keyCode == UP_ARROW) {
     player2.paddleUp = true;
   }
+  
+  //hit spacebar to restart game
   if (keyCode == '32') {
     fill("white");
     p1Score = 0;
@@ -154,6 +163,7 @@ function keyPressed() {
     puck.ySpeed = -1;
   	textPlay = '';
   }
+  
 
 }
 
